@@ -4,7 +4,7 @@ export function fact(x: number): number {
 
     let sum = 1;
     for (let i = 1; i <= x; i++) {
-        sum = sum + i;
+        sum = sum * i;
     }
 
     return sum;
