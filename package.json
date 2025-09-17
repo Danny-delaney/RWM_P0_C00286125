@@ -2,7 +2,7 @@
 	"name": "realwsim",
 	"version": "0.0.1",
 	"type": "module",
-	"main": "./src/lib/index.ts",
+	"main": "./src/lib/filters/index.ts",
   	"exports": { ".": "./src/lib/index.ts" },
 	"scripts": {
 		"dev": "vite dev",
