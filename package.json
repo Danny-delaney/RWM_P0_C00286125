@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"main": "./src/lib/filters/index.ts",
-  	"exports": { ".": "./src/lib/index.ts" },
+  	"exports": { ".": "./src/lib/filters/index.ts" },
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
