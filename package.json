@@ -1,8 +1,9 @@
 {
 	"name": "realwsim",
-	"private": true,
 	"version": "0.0.1",
 	"type": "module",
+	"main": "./src/lib/index.ts",
+  	"exports": { ".": "./src/lib/index.ts" },
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -10,7 +11,11 @@
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test": "vitest"
+		"test": "vitest",
+		"emit:results": "node scripts/emit-results.mjs"
+	},
+	"dependencies": {
+  		"rwm-p0-c00284421": "github:StevenKelly03/-RWM_P0_C00284421#v0.1.0"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^6.0.0",

@@ -1,5 +1,5 @@
 // Pure function: get the factorial of a number
-export function fact(x: number): number {
+function fact(x: number): number {
     if(x<0){throw new Error("Cannot be negitive");}
 
     let sum = 1;
