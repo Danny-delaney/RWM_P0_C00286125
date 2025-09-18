@@ -1,8 +1,12 @@
 <script lang="ts">
   import { cubes } from '$lib/filters';
-  let raw = '1 3 5 7 9 999';
+  import { Combined } from '$lib/filters/combined/combined';
+
+  let raw = '1 2 3 4 5';
+
   $: input = raw.trim().split(/\s+/).filter(Boolean).map(Number);
   $: output = cubes(input);
+  $: combinedOutput = Combined(input);
 </script>
 
 <h1>Sequence Filter Demo</h1>
@@ -11,8 +15,11 @@
   <input bind:value={raw} placeholder="e.g., 4 3 2 1 0" />
 </label>
 
-<h2>Output</h2>
+<h2>Cubes Output</h2>
 <p>{output.join(' ')}</p>
+
+<h2>Combined Output</h2>
+<p>{combinedOutput}</p>
 
 <style>
   label { display: block; margin: 1rem 0; }
