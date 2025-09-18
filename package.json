@@ -1,11 +1,10 @@
 {
   "name": "realwsim",
-  "version": "0.0.1",
+  "version": "v0.0.1",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./src/lib/filters/index.ts",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./src/lib/filters/index.ts"
   },
   "scripts": {
     "dev": "vite dev",
@@ -18,7 +17,7 @@
     "emit:results": "node scripts/emit-results.mjs"
   },
   "dependencies": {
-    "rwm-p0-c00284421": "github:StevenKelly03/-RWM_P0_C00284421#v0.1.0"
+    "rwm-p0-c00284421": "github:StevenKelly03/-RWM_P0_C00284421#v0.1.1"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^6.0.0",
