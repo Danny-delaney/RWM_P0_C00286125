@@ -13,7 +13,7 @@ const inputs = {
 
 const outputs = {};
 for (const [k, arr] of Object.entries(inputs)) {
-  outputs[k] = Combined(arr);
+    outputs[k] = Combined(arr);
 }
 
 const artefact = { filterOrder: 'mine→peer', inputs, outputs };
