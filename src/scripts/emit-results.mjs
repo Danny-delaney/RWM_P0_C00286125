@@ -1,8 +1,8 @@
 import { writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
-const mod = await import(pathToFileURL('./src/lib/combined/combined.ts').href);
-const { combinedFilter } = mod;
+const mod = await import(pathToFileURL('./src/lib/filters/combined/combined.ts').href);
+const { Combined } = mod;
 
 const inputs = {
   basic: [1, 3, 5, 7, 9, 999],
@@ -13,7 +13,7 @@ const inputs = {
 
 const outputs = {};
 for (const [k, arr] of Object.entries(inputs)) {
-  outputs[k] = combinedFilter(arr);
+  outputs[k] = Combined(arr);
 }
 
 const artefact = { filterOrder: 'mine→peer', inputs, outputs };
