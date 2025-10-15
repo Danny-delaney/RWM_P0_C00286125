@@ -14,7 +14,7 @@
   $: items = $itemsStore as Item[];
   $: liveTotal = items.length;
 
-  // --- Progress Bar Animation State ---
+  // --- Progress Bar Animation State --
   // Animated (dark) bar's current visual value
   let animPercent = 0;
   // Target (light) bar snaps to this immediately on submit
