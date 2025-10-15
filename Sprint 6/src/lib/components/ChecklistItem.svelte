@@ -3,6 +3,7 @@
   export let id;
   export let label;
   export let done = false;
+
   const dispatch = createEventDispatcher();
 
   function handleChange(event) {
@@ -11,6 +12,11 @@
 </script>
 
 <label>
-  <input type="checkbox" checked={done} on:change={handleChange} data-testid="checkbox" />
+  <input
+    type="checkbox"
+    checked={done}
+    on:change={handleChange}
+    data-testid="checkbox"
+  />
   {label}
 </label>
