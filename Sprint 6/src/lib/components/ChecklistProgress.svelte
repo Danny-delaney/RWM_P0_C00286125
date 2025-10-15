@@ -1,52 +1,51 @@
-<script>
+<script lang="ts">
   import ChecklistItem from './ChecklistItem.svelte';
+  import { get } from 'svelte/store';
+  import { itemsStore, completedStore, percentStore, type Item } from '$lib/stores';
 
-  export let items = [];
-
-  // Internal, mutable working copy of the checklist
-  let internal = items.map(item => ({ ...item }));
-
-  // For determinism: track the last items reference to detect real parent changes.
-  let lastItemsRef = items;
-
-  // Gate visible progress behind submit action
+  // Submit-gated snapshot values (shown in the UI label)
   let submitted = false;
+  let submittedCompleted = 0;
+  let submittedTotal = 0;
+  let submittedPercent = 0;
 
-  // Computed only on submit
-  let checkedCount = 0;
+  // Live subscriptions for rendering the list and computing totals
+  $: items = $itemsStore as Item[];
+  $: liveTotal = items.length;
 
-  function handleChange(e) {
-    const idx = internal.findIndex(i => i.id === e.detail.id);
-    if (idx !== -1) internal[idx].done = e.detail.done;
+  function handleChange(e: CustomEvent<{ id: number; done: boolean }>) {
+    const { id, done } = e.detail;
+    itemsStore.update((arr) => {
+      const idx = arr.findIndex((i) => i.id === id);
+      if (idx === -1) return arr;
+      const copy = [...arr];
+      copy[idx] = { ...copy[idx], done };
+      return copy;
+    });
   }
 
   function handleSubmit() {
-    // Recompute every time we submit (allows repeat submissions after changes)
-    checkedCount = internal.filter(i => i.done).length;
+    // Snapshot current derived values for the visible label
+    submittedCompleted = get(completedStore);
+    submittedTotal = get(itemsStore).length;
+    submittedPercent = get(percentStore);
     submitted = true;
   }
 
-  // Determinism: if parent provides a new items array (different reference),
-  // reset internal state so same inputs lead to same outputs.
-  $: if (items !== lastItemsRef) {
-    internal = items.map(i => ({ ...i }));
-    submitted = false;
-    checkedCount = 0;
-    lastItemsRef = items;
-  }
-
-  // Derived
-  $: total = internal.length;
-  $: percent = total ? Math.round((checkedCount / total) * 100) : 0;
-
-  // Optional: a single string for the label (helps tests stay consistent)
-  $: progressLabel = submitted ? `${checkedCount}/${total} (${percent}%)` : `0/${total} (0%)`;
+  // For tests: a single string for the label
+  $: progressLabel = submitted
+    ? `${submittedCompleted}/${submittedTotal} (${submittedPercent}%)`
+    : `0/${liveTotal} (0%)`;
 </script>
 
 <div>
-  {#each internal as item (item.id)}
-    <ChecklistItem {...item} on:change={handleChange} />
-  {/each}
+  {#if items.length === 0}
+    <p>No items.</p>
+  {:else}
+    {#each items as item (item.id)}
+      <ChecklistItem {...item} on:change={handleChange} />
+    {/each}
+  {/if}
 
   <button on:click={handleSubmit} data-testid="submit">Submit version</button>
 
