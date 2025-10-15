@@ -1,0 +1,3 @@
+[submodule "merge-conflicts/merge-conflict"]
+	path = merge-conflicts/merge-conflict
+	url = https://github.com/Danny-delaney/mergeConflicts
