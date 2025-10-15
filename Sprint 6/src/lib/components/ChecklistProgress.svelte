@@ -1,7 +1,7 @@
 <script lang="ts">
   import ChecklistItem from './ChecklistItem.svelte';
   import { get } from 'svelte/store';
-  import { itemsStore, completedStore, percentStore, type Item } from '$lib/stores';
+  import { itemsStore, completedStore, percentStore, type Item } from '../stores';
 
   // Submit-gated snapshot values (shown in the UI label)
   let submitted = false;
@@ -49,5 +49,7 @@
 
   <button on:click={handleSubmit} data-testid="submit">Submit version</button>
 
-  <p data-testid="progress">{progressLabel}</p>
+  <!-- Robust, accessible status region for tests -->
+  <!-- Remove redundant role="status" to satisfy a11y rule -->
+  <output aria-live="polite" data-testid="progress">{progressLabel}</output>
 </div>

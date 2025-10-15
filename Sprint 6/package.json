@@ -11,6 +11,7 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "test:e2e": "playwright test",
+    "pretest:e2e": "svelte-kit sync",
     "test": "npm run test:e2e && npm run test:unit -- --run",
     "test:unit": "vitest",
     "storybook": "storybook dev -p 6006",

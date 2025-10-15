@@ -12,12 +12,20 @@
   }
 </script>
 
-<label>
+<!-- Internal class renamed earlier; keep it. Add stable per-item testids. -->
+<label class="checkbox-row--renamed" data-testid={"item-" + id}>
   <input
     type="checkbox"
     checked={done}
     on:change={handleChange}
-    data-testid="checkbox"
+    data-testid={"checkbox-" + id}
   />
   {label}
 </label>
+
+<style>
+  /* This class name can change without breaking tests */
+  .checkbox-row--renamed {
+    /* keep any desired styling here */
+  }
+</style>
