@@ -1,3 +1,6 @@
 [submodule "merge-conflicts/merge-conflict"]
 	path = merge-conflicts/merge-conflict
 	url = https://github.com/Danny-delaney/mergeConflicts
+[submodule "P2_Repo"]
+	path = P2_Repo
+	url = https://github.com/Danny-delaney/P2_Repo.git
